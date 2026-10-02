@@ -1,0 +1,17 @@
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\GAToUnityCallbacks.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroEnd.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroHeaderBegin.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\MacroSourceBegin.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAApplication.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAConfiguration.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGADebug.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAEvents.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAInput.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboard.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGASoftKeyboardCallbacks.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGATypes.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UGAVersion.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGACallbacks.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAConfigurationCallbacks.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAKeyEventCallbacks.h
+D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\UnityToGAMotionEventCallbacks.h
