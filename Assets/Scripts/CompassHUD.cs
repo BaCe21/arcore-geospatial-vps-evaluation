@@ -95,6 +95,14 @@ public class CompassHUD : MonoBehaviour
             currentHeading
         );
     }
+    foreach (CardinalPoint cardinal in cardinals)
+    {
+    UpdateElementPosition(
+        cardinal.uiElement,
+        cardinal.bearing,
+        currentHeading
+    );
+    }
 }
     // Wspólna funkcja do przesuwania elementu na pasku UI
     private void UpdateElementPosition(RectTransform element, float targetBearing, float currentHeading)
