@@ -1,163 +1,251 @@
-using UnityEngine;
-using TMPro;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
-using Google.XR.ARCoreExtensions;
-using System.IO;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Google.XR.ARCoreExtensions;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.XR.ARSubsystems;
 
 public class ARTestLogger : MonoBehaviour
 {
     [Header("UI & References")]
-    public TextMeshProUGUI telemetryText;
-    public TMP_Dropdown scenarioDropdown; 
-    public AREarthManager earthManager;
-    public ARDebugController debugController;
+    [SerializeField] private TextMeshProUGUI telemetryText;
+    [SerializeField] private TMP_Dropdown scenarioDropdown;
+    [SerializeField] private AREarthManager earthManager;
+    [SerializeField] private ARDebugController debugController;
 
     private string filePath;
-    private bool isLocationServiceStarted = false;
-    private string currentScenario = "Brak";
-    
-    // NOWA ZMIENNA DO WYSWIETLANIA KOMUNIKATU NA EKRANIE
-    private float showSaveMessageTimer = 0f;
+    private bool isLocationServiceStarted;
+    private string currentScenario = "None";
+    private float showSaveMessageTimer;
 
-    void Start()
+    private void Start()
     {
-        // 1. Uruchamiamy pobieranie lokalizacji w tle (bezpiecznie)
-        StartCoroutine(InitializeLocationSafe());
+        StartCoroutine(InitializeLocation());
 
-        // 2. Konfiguracja Dropdowna
-        if (scenarioDropdown != null)
-        {
-            scenarioDropdown.ClearOptions();
-            List<string> options = new List<string> { 
-                "1_VPS_Bez_ToF_Stabilnie", 
-                "2_VPS_Bez_ToF_W_Ruchu",
-                "3_VPS_Z_ToF_Stabilnie",
-                "4_VPS_Z_ToF_W_Ruchu"
-            };
-            scenarioDropdown.AddOptions(options);
-            scenarioDropdown.onValueChanged.AddListener(delegate { DropdownValueChanged(scenarioDropdown); });
-            currentScenario = options[0];
-        }
-
-        // 3. Konfiguracja pliku badawczego
-        string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-        filePath = Application.persistentDataPath + "/Wyniki_Magisterka.csv";
-        
-        string header = "Czas;Scenariusz;Status_VPS;RawGPS_Lat;RawGPS_Lon;RawGPS_Acc;VPS_Lat;VPS_Lon;VPS_HorizAcc;VPS_YawAcc;Blad_Reczny_X;Blad_Reczny_Z;Calkowity_Blad_Metryczny\n";
-        File.WriteAllText(filePath, header);
-        
-        Debug.Log($"Plik badawczy utworzony: {filePath}");
+        ConfigureScenarioDropdown();
+        CreateMeasurementFile();
     }
 
-    IEnumerator InitializeLocationSafe()
+    private void ConfigureScenarioDropdown()
+    {
+        if (scenarioDropdown == null)
+            return;
+
+        List<string> options = new()
+        {
+            "1_VPS_No_ToF_Static",
+            "2_VPS_No_ToF_Moving",
+            "3_VPS_ToF_Static",
+            "4_VPS_ToF_Moving"
+        };
+
+        scenarioDropdown.ClearOptions();
+        scenarioDropdown.AddOptions(options);
+        scenarioDropdown.onValueChanged.AddListener(OnScenarioChanged);
+
+        currentScenario = options[0];
+    }
+
+    private void CreateMeasurementFile()
+    {
+        string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+        filePath = Path.Combine(
+            Application.persistentDataPath,
+            $"geospatial_measurements_{timestamp}.csv"
+        );
+
+        const string header =
+            "Time;Scenario;VPS_Status;RawGPS_Lat;RawGPS_Lon;RawGPS_Accuracy;" +
+            "VPS_Lat;VPS_Lon;VPS_HorizontalAccuracy;VPS_YawAccuracy;" +
+            "ManualOffset_X;ManualOffset_Z;HorizontalOffset\n";
+
+        File.WriteAllText(filePath, header);
+
+        Debug.Log($"Measurement file created: {filePath}");
+    }
+
+    private IEnumerator InitializeLocation()
     {
         if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
         {
             Permission.RequestUserPermission(Permission.FineLocation);
-            yield return new WaitForSeconds(3.0f);
+
+            yield return new WaitForSeconds(3f);
         }
 
-        if (Input.location.isEnabledByUser)
+        if (!Input.location.isEnabledByUser)
+            yield break;
+
+        Input.location.Start(1f, 1f);
+        isLocationServiceStarted = true;
+    }
+
+    private void OnScenarioChanged(int index)
+    {
+        if (scenarioDropdown == null)
+            return;
+
+        currentScenario = scenarioDropdown.options[index].text;
+    }
+
+    private void Update()
+    {
+        if (earthManager == null || telemetryText == null)
+            return;
+
+        telemetryText.text = BuildTelemetryText();
+
+        if (showSaveMessageTimer > 0f)
         {
-            Input.location.Start(1f, 1f); 
-            isLocationServiceStarted = true;
+            showSaveMessageTimer -= Time.deltaTime;
         }
     }
 
-    void DropdownValueChanged(TMP_Dropdown change)
+    private string BuildTelemetryText()
     {
-        currentScenario = change.options[change.value].text;
-    }
-
-    void Update()
-    {
-        if (earthManager == null || telemetryText == null) return;
-
-        string log = $"<b>TEST: <color=#FFFF00>{currentScenario}</color></b>\n\n";
+        string log =
+            $"<b>TEST: <color=#FFFF00>{currentScenario}</color></b>\n\n";
 
         log += "<color=#FFA500>--- RAW GPS ---</color>\n";
+
         if (Input.location.status == LocationServiceStatus.Running)
         {
-            log += $"Acc: {Input.location.lastData.horizontalAccuracy} m\n";
+            log +=
+                $"Accuracy: {Input.location.lastData.horizontalAccuracy:F2} m\n";
         }
         else
         {
             log += $"Status: {Input.location.status}\n";
         }
 
-        log += "\n<color=#00FF00>--- VPS (Geospatial) ---</color>\n";
+        log += "\n<color=#00FF00>--- VPS ---</color>\n";
         log += $"Tracking: {earthManager.EarthTrackingState}\n";
 
-        if (earthManager.EarthTrackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
+        if (earthManager.EarthTrackingState == TrackingState.Tracking)
         {
             GeospatialPose pose = earthManager.CameraGeospatialPose;
-            log += $"HorizAcc: {pose.HorizontalAccuracy:F2} m\n";
-            log += $"YawAcc: {pose.OrientationYawAccuracy:F2}°\n";
+
+            log += $"Horizontal accuracy: {pose.HorizontalAccuracy:F2} m\n";
+            log += $"Yaw accuracy: {pose.OrientationYawAccuracy:F2}°\n";
         }
 
-        log += "\n<color=#00FFFF>--- POMIAR BŁĘDU (OFFSET) ---</color>\n";
-        if (debugController != null && debugController.gisModelContainer != null)
+        log += "\n<color=#00FFFF>--- MANUAL OFFSET ---</color>\n";
+
+        if (TryGetHorizontalOffset(
+            out float offsetX,
+            out float offsetZ,
+            out float totalOffset))
         {
-            Vector3 offset = debugController.gisModelContainer.localPosition;
-            float horizontalError = Mathf.Sqrt(offset.x * offset.x + offset.z * offset.z);
-            log += $"X: 0 m | Z: 0 m\n";
-            log += $"<b>Błąd metryczny: 0 m</b>\n";
+            log += $"X: {offsetX:F2} m | Z: {offsetZ:F2} m\n";
+            log += $"<b>Horizontal offset: {totalOffset:F2} m</b>\n";
         }
-
-        // WYSWIETLANIE KOMUNIKATU PRZEZ 2 SEKUNDY
-        if (showSaveMessageTimer > 0)
+        else
         {
-            log += "\n<color=red><b>ZAPISANO DO PLIKU CSV!</b></color>";
-            showSaveMessageTimer -= Time.deltaTime;
+            log += "Offset unavailable\n";
         }
 
-        telemetryText.text = log;
+        if (showSaveMessageTimer > 0f)
+        {
+            log += "\n<color=green><b>MEASUREMENT SAVED</b></color>";
+        }
+
+        return log;
     }
 
     public void RecordDataPoint()
     {
+        if (earthManager == null || string.IsNullOrEmpty(filePath))
+            return;
+
         string timestamp = DateTime.Now.ToString("HH:mm:ss");
-        
-        float rawLat = Input.location.status == LocationServiceStatus.Running ? Input.location.lastData.latitude : 0;
-        float rawLon = Input.location.status == LocationServiceStatus.Running ? Input.location.lastData.longitude : 0;
-        float rawAcc = Input.location.status == LocationServiceStatus.Running ? Input.location.lastData.horizontalAccuracy : 0;
+
+        bool gpsRunning =
+            Input.location.status == LocationServiceStatus.Running;
+
+        float rawLat =
+            gpsRunning ? Input.location.lastData.latitude : 0f;
+
+        float rawLon =
+            gpsRunning ? Input.location.lastData.longitude : 0f;
+
+        float rawAccuracy =
+            gpsRunning ? Input.location.lastData.horizontalAccuracy : 0f;
 
         string vpsStatus = earthManager.EarthTrackingState.ToString();
-        float vpsLat = 0, vpsLon = 0, vpsHorizAcc = 0, vpsYawAcc = 0;
-        
-        if (earthManager.EarthTrackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
+
+        double vpsLat = 0;
+        double vpsLon = 0;
+        double vpsHorizontalAccuracy = 0;
+        double vpsYawAccuracy = 0;
+
+        if (earthManager.EarthTrackingState == TrackingState.Tracking)
         {
             GeospatialPose pose = earthManager.CameraGeospatialPose;
-            vpsLat = (float)pose.Latitude;
-            vpsLon = (float)pose.Longitude;
-            vpsHorizAcc = (float)pose.HorizontalAccuracy;
-            vpsYawAcc = (float)pose.OrientationYawAccuracy;
+
+            vpsLat = pose.Latitude;
+            vpsLon = pose.Longitude;
+            vpsHorizontalAccuracy = pose.HorizontalAccuracy;
+            vpsYawAccuracy = pose.OrientationYawAccuracy;
         }
 
-        float offsetX = 0, offsetZ = 0, totalError = 0;
-        if (debugController != null && debugController.gisModelContainer != null)
-        {
-            Vector3 offset = debugController.gisModelContainer.localPosition;
-            offsetX = offset.x;
-            offsetZ = offset.z;
-            totalError = Mathf.Sqrt(offset.x * offset.x + offset.z * offset.z);
-        }
+        TryGetHorizontalOffset(
+            out float offsetX,
+            out float offsetZ,
+            out float totalOffset
+        );
 
-        string dataRow = $"{timestamp};{currentScenario};{vpsStatus};{rawLat:F6};{rawLon:F6};{rawAcc:F2};{vpsLat:F6};{vpsLon:F6};{vpsHorizAcc:F2};{vpsYawAcc:F2};{offsetX:F2};{offsetZ:F2};{totalError:F2}\n";
-        
-        File.AppendAllText(filePath, dataRow);
-        
-        // AKTYWACJA TIMERA KOMUNIKATU
-        showSaveMessageTimer = 2.0f; 
+        string row =
+            $"{timestamp};{currentScenario};{vpsStatus};" +
+            $"{rawLat:F6};{rawLon:F6};{rawAccuracy:F2};" +
+            $"{vpsLat:F6};{vpsLon:F6};" +
+            $"{vpsHorizontalAccuracy:F2};{vpsYawAccuracy:F2};" +
+            $"{offsetX:F2};{offsetZ:F2};{totalOffset:F2}\n";
+
+        File.AppendAllText(filePath, row);
+
+        showSaveMessageTimer = 2f;
     }
 
-    void OnDestroy()
+    private bool TryGetHorizontalOffset(
+        out float offsetX,
+        out float offsetZ,
+        out float totalOffset)
     {
+        offsetX = 0f;
+        offsetZ = 0f;
+        totalOffset = 0f;
+
+        if (debugController == null ||
+            debugController.GisModelContainer == null)
+        {
+            return false;
+        }
+
+        Vector3 offset =
+            debugController.GisModelContainer.localPosition;
+
+        offsetX = offset.x;
+        offsetZ = offset.z;
+
+        totalOffset =
+            Mathf.Sqrt(offsetX * offsetX + offsetZ * offsetZ);
+
+        return true;
+    }
+
+    private void OnDestroy()
+    {
+        if (scenarioDropdown != null)
+        {
+            scenarioDropdown.onValueChanged.RemoveListener(
+                OnScenarioChanged
+            );
+        }
+
         if (isLocationServiceStarted)
         {
             Input.location.Stop();

@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "com.cesium.unity": "file:C:/Users/krzys/Downloads/com.cesium.unity-1.15.4.tgz",
-    "com.google.ar.core.arfoundation.extensions": "file:C:/Users/krzys/Downloads/arcore-unity-extensions-1.48.0-arf6.tgz",
     "com.unity.ai.navigation": "2.0.9",
     "com.unity.cloud.gltfast": "6.19.0",
     "com.unity.collab-proxy": "2.12.4",

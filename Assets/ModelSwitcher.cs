@@ -2,50 +2,53 @@ using UnityEngine;
 
 public class ModelSwitcher : MonoBehaviour
 {
-    public GameObject[] models;
+    [SerializeField] private GameObject[] models;
 
-    private int currentIndex = 0;
+    private int currentIndex;
 
-    void Start()
+    private void Start()
     {
-        if (models.Length > 0)
-        {
-            UpdateVisibility();
-        }
+        UpdateVisibility();
     }
 
     public void NextModel()
     {
-        if (models.Length == 0) return;
+        if (models == null || models.Length == 0)
+            return;
 
-        currentIndex++;
-        if (currentIndex >= models.Length)
-        {
-            currentIndex = 0;
-        }
+        currentIndex =
+            (currentIndex + 1) % models.Length;
+
         UpdateVisibility();
     }
 
     public void PreviousModel()
     {
-        if (models.Length == 0) return;
+        if (models == null || models.Length == 0)
+            return;
 
         currentIndex--;
+
         if (currentIndex < 0)
         {
             currentIndex = models.Length - 1;
         }
+
         UpdateVisibility();
     }
 
-
     private void UpdateVisibility()
     {
+        if (models == null)
+            return;
+
         for (int i = 0; i < models.Length; i++)
         {
             if (models[i] != null)
             {
-                models[i].SetActive(i == currentIndex);
+                models[i].SetActive(
+                    i == currentIndex
+                );
             }
         }
     }

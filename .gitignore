@@ -70,3 +70,13 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+# Unity / Android temporary build files
+.utmp/
+
+# Editor files
+.vscode/
+.vsconfig
+*.slnx
+
+# Android template backups
+Assets/Plugins/Android/*.backup*

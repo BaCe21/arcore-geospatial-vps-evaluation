@@ -74,22 +74,27 @@ public class CompassHUD : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // Kąt patrzenia kamery AR
-        float currentHeading = Camera.main.transform.eulerAngles.y;
-        currentHeading = (currentHeading + 180f) % 360f;
-        // Aktualizujemy pozycje miast na pasku
-        foreach (var poi in poiList)
-        {
-            UpdateElementPosition(poi.uiElement, poi.bearing, currentHeading);
-        }
+    private void Update()
+{
+    Camera mainCamera = Camera.main;
 
-        // Aktualizujemy pozycje liter N, E, S, W na pasku
-        foreach (var cardinal in cardinals)
-        {
-            UpdateElementPosition(cardinal.uiElement, cardinal.bearing, currentHeading);
-        }
+    if (mainCamera == null)
+        return;
+
+    float currentHeading =
+        mainCamera.transform.eulerAngles.y;
+
+    currentHeading =
+        (currentHeading + 180f) % 360f;
+
+    foreach (POI poi in poiList)
+    {
+        UpdateElementPosition(
+            poi.uiElement,
+            poi.bearing,
+            currentHeading
+        );
+    }
     }
 
     // Wspólna funkcja do przesuwania elementu na pasku UI

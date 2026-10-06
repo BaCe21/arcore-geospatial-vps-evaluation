@@ -1,46 +1,55 @@
-using UnityEngine;
-using TMPro; // Używamy TextMeshPro dla ostrego tekstu
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class OnScreenLogger : MonoBehaviour
 {
-    [Header("UI Element")]
-    public TextMeshProUGUI logTextDisplay;
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI logTextDisplay;
 
     [Header("Settings")]
-    public int maxLogLines = 15; // Ile linii tekstu trzymać na ekranie
-    
-    private Queue<string> logQueue = new Queue<string>();
+    [SerializeField]
+    [Min(1)]
+    private int maxLogLines = 15;
 
-    void OnEnable()
+    private readonly Queue<string> logQueue = new();
+
+    private void OnEnable()
     {
-        // Podpinamy się pod wbudowany system logów Unity
         Application.logMessageReceived += HandleLog;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        // Odpinamy się, gdy obiekt jest wyłączany (dobra praktyka)
         Application.logMessageReceived -= HandleLog;
     }
 
-    void HandleLog(string logString, string stackTrace, LogType type)
+    private void HandleLog(
+        string logString,
+        string stackTrace,
+        LogType type)
     {
-        // Kolorowanie logów w zależności od typu
-        string colorTag = "<color=white>";
-        if (type == LogType.Error || type == LogType.Exception) colorTag = "<color=red>";
-        else if (type == LogType.Warning) colorTag = "<color=yellow>";
+        if (logTextDisplay == null)
+            return;
 
-        // Dodajemy nową linię do kolejki
-        logQueue.Enqueue(colorTag + logString + "</color>");
+        string colorTag = type switch
+        {
+            LogType.Error => "<color=red>",
+            LogType.Exception => "<color=red>",
+            LogType.Warning => "<color=yellow>",
+            _ => "<color=white>"
+        };
 
-        // Jeśli mamy za dużo linii, wyrzucamy najstarszą
-        if (logQueue.Count > maxLogLines)
+        logQueue.Enqueue(
+            $"{colorTag}{logString}</color>"
+        );
+
+        while (logQueue.Count > maxLogLines)
         {
             logQueue.Dequeue();
         }
 
-        // Zlepiamy to w jeden wielki tekst i rzucamy na ekran
-        logTextDisplay.text = string.Join("\n", logQueue);
+        logTextDisplay.text =
+            string.Join("\n", logQueue);
     }
 }

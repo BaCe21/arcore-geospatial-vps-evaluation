@@ -1,2 +1,0 @@
-D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
-D:\Format Files 30.03.2024\studia\pk\PWiRRz\magisterka-old\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
