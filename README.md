@@ -1,4 +1,4 @@
-### ARCore Geospatial **VPS** & **GNSS** Evaluation
+# ARCore Geospatial **VPS** & **GNSS** Evaluation
 Unity-based AR research prototype developed as the practical component of a Master's thesis.
 The application was created to evaluate and compare positioning information from mobile **GNSS** and the ARCore Geospatial **API**, with a focus on **VPS**-assisted spatial tracking and real-world AR alignment.
 ### Project Overview
@@ -60,7 +60,7 @@ Controls proximity-based point-of-interest labels in AR.
 ### OnScreenLogger
 Provides an in-application view of Unity runtime logs during Android testing.
 
-### Dependencies
+## Dependencies
 The original thesis project used:
 - ARCore Extensions for AR Foundation 1.48.0 with AR Foundation 6
 - Cesium for Unity 1.15.4
