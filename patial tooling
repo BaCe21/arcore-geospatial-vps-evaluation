@@ -1,0 +1,176 @@
+ .gitignore                                         |   12 [32m+[m[31m-[m
+ .../.cmake/api/v1/query/client-agp/cache-v2        |    0
+ .../.cmake/api/v1/query/client-agp/cmakeFiles-v1   |    0
+ .../.cmake/api/v1/query/client-agp/codemodel-v2    |    0
+ .../v1/reply/cache-v2-e6abd7edd67fec3b1242.json    | 1383 [31m--------------------[m
+ .../reply/cmakeFiles-v1-5d076e38abffb65135ff.json  |  195 [31m---[m
+ .../reply/codemodel-v2-46f888dcf24315b55a9d.json   |   87 [31m--[m
+ ...tory-.-RelWithDebInfo-d0094a50bb2071803777.json |   14 [31m-[m
+ ...tivity-RelWithDebInfo-3edf2ef9e25ca0503118.json |   14 [31m-[m
+ .../v1/reply/index-2026-09-07T12-10-02-0091.json   |   92 [31m--[m
+ ...t-game-RelWithDebInfo-3ee05e087683b65be92b.json |  326 [31m-----[m
+ .../RelWithDebInfo/103p6154/arm64-v8a/.ninja_deps  |  Bin [31m2553636[m -> [32m0[m bytes
+ .utmp/RelWithDebInfo/103p6154/arm64-v8a/.ninja_log |   19 [31m-[m
+ .../103p6154/arm64-v8a/CMakeCache.txt              |  415 [31m------[m
+ .../3.22.1-g37088a8-dirty/CMakeCCompiler.cmake     |   72 [31m-[m
+ .../3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake   |   83 [31m--[m
+ .../CMakeDetermineCompilerABI_C.bin                |  Bin [31m8064[m -> [32m0[m bytes
+ .../CMakeDetermineCompilerABI_CXX.bin              |  Bin [31m8184[m -> [32m0[m bytes
+ .../3.22.1-g37088a8-dirty/CMakeSystem.cmake        |   15 [31m-[m
+ .../CompilerIdC/CMakeCCompilerId.c                 |  803 [31m------------[m
+ .../CompilerIdC/CMakeCCompilerId.o                 |  Bin [31m6016[m -> [32m0[m bytes
+ .../CompilerIdCXX/CMakeCXXCompilerId.cpp           |  791 [31m-----------[m
+ .../CompilerIdCXX/CMakeCXXCompilerId.o             |  Bin [31m6032[m -> [32m0[m bytes
+ .../103p6154/arm64-v8a/CMakeFiles/CMakeOutput.log  |  270 [31m----[m
+ .../arm64-v8a/CMakeFiles/TargetDirectories.txt     |    5 [31m-[m
+ .../arm64-v8a/CMakeFiles/cmake.check_cache         |    1 [31m-[m
+ .../103p6154/arm64-v8a/CMakeFiles/rules.ninja      |   64 [31m-[m
+ .../CMakeFiles/game.dir/UGAApplication.cpp.o       |  Bin [31m554008[m -> [32m0[m bytes
+ .../CMakeFiles/game.dir/UGAConfiguration.cpp.o     |  Bin [31m126472[m -> [32m0[m bytes
+ .../CMakeFiles/game.dir/UGADebug.cpp.o             |  Bin [31m207120[m -> [32m0[m bytes
+ .../CMakeFiles/game.dir/UGAEntry.cpp.o             |  Bin [31m48360[m -> [32m0[m bytes
+ .../CMakeFiles/game.dir/UGAInput.cpp.o             |  Bin [31m372408[m -> [32m0[m bytes
+ .../CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o     |  Bin [31m48464[m -> [32m0[m bytes
+ .../CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o  |  Bin [31m101664[m -> [32m0[m bytes
+ .../CMakeFiles/game.dir/UGASoftKeyboard.cpp.o      |  Bin [31m184080[m -> [32m0[m bytes
+ .../arm64-v8a/GameActivity/cmake_install.cmake     |   44 [31m-[m
+ .../arm64-v8a/additional_project_files.txt         |   17 [31m-[m
+ .../103p6154/arm64-v8a/android_gradle_build.json   |   39 [31m-[m
+ .../arm64-v8a/android_gradle_build_mini.json       |   28 [31m-[m
+ .../RelWithDebInfo/103p6154/arm64-v8a/build.ninja  |  243 [31m----[m
+ .../103p6154/arm64-v8a/build_file_index.txt        |    2 [31m-[m
+ .../103p6154/arm64-v8a/cmake_install.cmake         |   60 [31m-[m
+ .../103p6154/arm64-v8a/compile_commands.json       |   42 [31m-[m
+ .../103p6154/arm64-v8a/compile_commands.json.bin   |  Bin [31m3086[m -> [32m0[m bytes
+ .../103p6154/arm64-v8a/configure_fingerprint.bin   |   31 [31m-[m
+ .../arm64-v8a/metadata_generation_command.txt      |   21 [31m-[m
+ .../103p6154/arm64-v8a/prefab_config.json          |    7 [31m-[m
+ .../103p6154/arm64-v8a/symbol_folder_index.txt     |    1 [31m-[m
+ .utmp/RelWithDebInfo/103p6154/hash_key.txt         |   28 [31m-[m
+ .../cmake/game-activity/game-activityConfig.cmake  |   18 [31m-[m
+ .../tools/release/arm64-v8a/compile_commands.json  |   42 [31m-[m
+ .vscode/extensions.json                            |    5 [31m-[m
+ .vscode/launch.json                                |   10 [31m-[m
+ .vscode/settings.json                              |   70 [31m-[m
+ Assets/ARPointOfInterest.cs                        |   66 [32m+[m[31m-[m
+ Assets/GeospatialTelemetry.cs                      |   88 [32m+[m[31m-[m
+ Assets/ModelSwitcher.cs                            |   35 [32m+[m[31m-[m
+ Assets/OnScreenLogger.cs                           |   53 [32m+[m[31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup  |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup.meta        |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup10   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup10.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup11   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup11.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup12   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup12.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup13   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup13.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup14   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup14.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup15   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup15.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup16   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup16.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup17   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup17.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup18   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup18.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup19   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup19.meta      |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup2 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup2.meta       |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup20   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup20.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup21   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup21.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup22   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup22.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup23   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup23.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup24   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup24.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup25   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup25.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup26   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup26.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup27   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup27.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup28   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup28.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup29   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup29.meta      |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup3 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup3.meta       |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup30   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup30.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup31   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup31.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup32   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup32.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup33   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup33.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup34   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup34.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup35   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup35.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup36   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup36.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup37   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup37.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup38   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup38.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup39   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup39.meta      |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup4 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup4.meta       |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup40   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup40.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup41   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup41.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup42   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup42.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup43   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup43.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup44   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup44.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup45   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup45.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup46   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup46.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup47   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup47.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup48   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup48.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup49   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup49.meta      |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup5 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup5.meta       |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup50   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup50.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup51   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup51.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup52   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup52.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup53   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup53.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup54   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup54.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup55   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup55.meta      |    7 [31m-[m
+ .../Plugins/Android/mainTemplate.gradle.backup56   |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup56.meta      |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup6 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup6.meta       |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup7 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup7.meta       |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup8 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup8.meta       |    7 [31m-[m
+ Assets/Plugins/Android/mainTemplate.gradle.backup9 |   61 [31m-[m
+ .../Android/mainTemplate.gradle.backup9.meta       |    7 [31m-[m
+ Assets/Scripts/ARDebugController.cs                |  125 [32m+[m[31m-[m
+ Assets/Scripts/ARTestLogger.cs                     |  266 [32m++[m[31m--[m
+ Assets/Scripts/CompassHUD.cs                       |   35 [32m+[m[31m-[m
+ Packages/manifest.json                             |    2 [31m-[m
+ README.md                                          |   77 [32m+[m[31m-[m
+ 175 files changed, 491 insertions(+), 9433 deletions(-)
