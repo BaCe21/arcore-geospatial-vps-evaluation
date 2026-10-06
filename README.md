@@ -26,7 +26,7 @@ Measurements are stored as **CSV** files for later analysis.
 ### Spatial Alignment
 Real-world spatial models prepared using **GIS** tooling were imported into Unity and aligned with ARCore Geospatial anchors.
 The application also provides manual X/Y/Z offset controls for evaluating and correcting visible alignment differences between the virtual model and the physical environment.
-Compass and Points of Interest
+### Compass and Points of Interest
 The prototype contains a lightweight compass **HUD** and point-of-interest system.
 Bearings between geographic coordinates are calculated using spherical latitude/longitude calculations and mapped to screen-space compass positions.
 ### Tech Stack
@@ -41,19 +41,26 @@ Bearings between geographic coordinates are calculated using spherical latitude/
 - glTF
 - Android
 ### Main Components
-ARTestLogger
+
+### ARTestLogger
 Collects **GNSS** and **VPS** telemetry and stores measurement samples in **CSV** files.
-ARDebugController
+
+### ARDebugController
 Manages geospatial anchor recreation and manual model alignment offsets.
-GeospatialTelemetry
+
+### GeospatialTelemetry
 Displays real-time ARCore Geospatial tracking and accuracy information.
-CompassHUD
+
+### CompassHUD
 Calculates bearings to geographic points of interest and displays them on a compass-style **HUD**.
-ARPointOfInterest
+
+### ARPointOfInterest
 Controls proximity-based point-of-interest labels in AR.
-OnScreenLogger
+
+### OnScreenLogger
 Provides an in-application view of Unity runtime logs during Android testing.
-Dependencies
+
+### Dependencies
 The original thesis project used:
 - ARCore Extensions for AR Foundation 1.48.0 with AR Foundation 6
 - Cesium for Unity 1.15.4
