@@ -95,8 +95,7 @@ public class CompassHUD : MonoBehaviour
             currentHeading
         );
     }
-    }
-
+}
     // Wspólna funkcja do przesuwania elementu na pasku UI
     private void UpdateElementPosition(RectTransform element, float targetBearing, float currentHeading)
     {
